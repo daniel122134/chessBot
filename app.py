@@ -1,4 +1,5 @@
 import os
+import time
 
 import chess
 from flask import Flask, send_from_directory, request
@@ -62,4 +63,5 @@ def files(path):
 
 if __name__ == '__main__':
     # app.run("0.0.0.0", 8080, debug=True)
-    await controller.move_piece(16, 17, board)
+    controller.move_piece(16, 17, board)
+    time.sleep(10)
