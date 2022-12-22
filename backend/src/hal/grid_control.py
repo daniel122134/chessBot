@@ -28,7 +28,7 @@ class GridControl:
         col = square_num % 8
         x = self.offset_left + (col * self.cell_width) + self.cell_width / 2
         y = self.offset_up + (row * self.cell_height) + self.cell_height / 2
-        self.move_to_coordinates(x, y)
+        await self.move_to_coordinates(x, y)
 
     async def move_to_coordinates(self, x, y):
         x_to_move_mm = x - self.current_x
