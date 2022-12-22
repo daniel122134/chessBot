@@ -24,7 +24,7 @@ class Engine:
         if steps < 0:
             self.change_dir()
 
-        for i in range(abs(steps)):
+        for i in range(abs(int(steps))):
             self.step_pin.toggle()
             # await asyncio.sleep(sleep_time)
             if self.direction:
