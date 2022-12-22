@@ -30,7 +30,7 @@ class GridControl:
         y = self.offset_up + (row * self.cell_height) + self.cell_height / 2
         self.move_to_coordinates(x, y)
 
-    async def move_to_coordinates(self, x, y):
+    def move_to_coordinates(self, x, y):
         x_to_move_mm = x - self.current_x
         y_to_move_mm = y - self.current_y
         x_steps = x_to_move_mm * self.steps_to_mm_ratio
