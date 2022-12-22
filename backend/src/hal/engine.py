@@ -26,7 +26,7 @@ class Engine:
 
         for i in range(abs(steps)):
             self.step_pin.toggle()
-            await asyncio.sleep(sleep_time)
+            # await asyncio.sleep(sleep_time)
             if self.direction:
                 self.distance_out += 1 / self.precision
             else:
