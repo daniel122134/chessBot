@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Daniel JS</title>
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--Favicon-->
+    <link rel="apple-touch-icon" sizes="180x180" href="./res/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./res/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./res/favicon-16x16.png">
+    <link rel="icon" href="./favicon.ico?v=4" />
+
+    <!--Font Roboto Mono-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet">
+
+    <!--Styles-->
+    <link href="./src/style/theme.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto Mono', monospace;
+            height: 100%;
+            margin: 0;
+            background-color: var(--primary-color);
+            color: var(--text-color);
+        }
+
+        html {
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body theme="dark">
+
+<!--Icons-->
+<link rel="stylesheet" href="https://kit-free.fontawesome.com/releases/latest/css/free.min.css" media="all">
+<link rel="stylesheet" href="https://kit-free.fontawesome.com/releases/latest/css/free-v4-shims.min.css"
+      media="all">
+
+
+<!--Markdown-->
+<script src="./libs/showdown/showdown.min.js"></script>
+<script src="./libs/highlight/highlight.min.js"></script>
+<script src="./libs/showdown-highlight/he.js"></script>
+<script src="./libs/showdown-highlight/showdown-highlight.min.js"></script>
+
+<!--App-->
+<script src="src/daniel-hw-app.js" type="module"></script>
+
+<daniel-hw-app></daniel-hw-app>
+</body>
+</html>

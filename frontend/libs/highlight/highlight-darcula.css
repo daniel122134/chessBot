@@ -1,0 +1,78 @@
+/*!*!*/
+/*  Theme: Darcula*/
+/*  Author: jetbrains*/
+/*  License: ~ MIT (or more permissive) [via base16-schemes-source]*/
+/*  Maintainer: @highlightjs/core-team*/
+/*  Version: 2021.05.0*/
+/**!*/
+
+pre code.hljs {
+    display: block;
+    overflow-x: auto;
+    padding: 1em;
+}
+
+code.hljs {
+    padding: 3px 5px;
+}
+
+.hljs {
+    color: #a9b7c6;
+    /*background: #2b2b2b;*/
+    background: #00000018;
+}
+
+.hljs-comment,
+.hljs-quote {
+    color: #4e6a87; }
+
+.hljs-variable,
+.hljs-template-variable,
+.hljs-regexp,
+.hljs-deletion,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-selector-tag,
+.hljs-params,
+.hljs-attr {
+    color: #F8B068; }
+
+.hljs-keyword {
+    color: #B896ED; }
+
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-meta,
+.hljs-link {
+    color: #C68FE8; }
+
+.hljs-attribute {
+    color: #5b9dd0; }
+
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+    color: #f5eea2; }
+
+.hljs-subst,
+.hljs-number {
+    color: #ED6E55; }
+
+.hljs-title,
+.hljs-section,
+.hljs-name {
+    color: #FF4F68; }
+
+.hljs {
+    display: block;
+    overflow-x: auto;
+    color: #f0f0f0; }
+
+.hljs-emphasis {
+    font-style: italic; }
+
+.hljs-strong {
+    font-weight: bold; }

@@ -1,0 +1,12 @@
+opencv-python
+numpy
+matplotlib
+pandas
+seaborn
+sklearn
+scipy
+imutils
+flask
+pymongo
+dnspython
+chess
