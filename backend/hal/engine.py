@@ -7,6 +7,7 @@ from backend.hal.config.steps_config import prec_configuration_mapping
 INTERVAL = 0.001
 
 
+
 class Engine:
     def __init__(self, step_pin, dir_pin, mode1, mode2, mode3, distance_out, percision=1, direction=True):
         self.step_pin = DigitalOutputDevice(step_pin)
