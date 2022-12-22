@@ -7,7 +7,6 @@ from backend.src.hal.config.steps_config import prec_configuration_mapping
 INTERVAL = 0.001
 
 
-
 class Engine:
     def __init__(self, step_pin, dir_pin, mode1, mode2, mode3, distance_out=0, percision=1, direction=True):
         self.step_pin = DigitalOutputDevice(step_pin)
@@ -22,18 +21,18 @@ class Engine:
 
     async def engine_move(self, steps=100):
         sleep_time = INTERVAL / self.precision
-        if steps <0:
+        if steps < 0:
             self.change_dir()
 
         for i in range(abs(steps)):
             self.step_pin.toggle()
             await asyncio.sleep(sleep_time)
             if self.direction:
-                self.distance_out += 1/self.precision
+                self.distance_out += 1 / self.precision
             else:
-                self.distance_out -= 1/self.precision
+                self.distance_out -= 1 / self.precision
 
-        if steps<0:
+        if steps < 0:
             self.change_dir()
 
     def change_dir(self):

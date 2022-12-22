@@ -37,7 +37,7 @@ class GridControl:
         y_steps = y_to_move_mm * self.steps_to_mm_ratio
 
         tasks = []
-
+        
         tasks.append(asyncio.create_task(self.vertical_engine.engine_move(x_steps)))
         tasks.append(asyncio.create_task(self.horizontal_engine.engine_move(y_steps)))
 
