@@ -19,7 +19,7 @@ class Engine:
         self.precision = percision
         self.apply_percision()
 
-    async def engine_move(self, steps=100):
+    def engine_move(self, steps=100):
         sleep_time = INTERVAL / self.precision
         if steps < 0:
             self.change_dir()
