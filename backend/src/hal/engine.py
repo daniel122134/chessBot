@@ -43,9 +43,9 @@ class Engine:
         self.mode1.off()
         self.mode2.off()
         self.mode3.off()
-        if prec_configuration_mapping[self.precision]["m0"]:
+        if prec_configuration_mapping[self.precision]["ms0"]:
             self.mode1.on()
-        if prec_configuration_mapping[self.precision]["m1"]:
+        if prec_configuration_mapping[self.precision]["ms1"]:
             self.mode2.on()
-        if prec_configuration_mapping[self.precision]["m2"]:
+        if prec_configuration_mapping[self.precision]["ms2"]:
             self.mode3.on()
