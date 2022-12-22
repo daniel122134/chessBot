@@ -23,7 +23,7 @@ class GridControl:
     def move_left_1_centimeter(self):
         self.move_to_coordinates(self.current_x - 10, self.current_y)
 
-    def move_to_square(self, square_num):
+    async def move_to_square(self, square_num):
         row = square_num // 8
         col = square_num % 8
         x = self.offset_left + (col * self.cell_width) + self.cell_width / 2

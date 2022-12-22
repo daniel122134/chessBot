@@ -44,7 +44,7 @@ def move_piece():
     date = request.json
     src = date["src"]
     dst = date["dst"]
-    controller.move_piece(src, dst, board)
+    await controller.move_piece(src, dst, board)
 
 
 @app.route('/random', methods=["GET"])
@@ -62,4 +62,4 @@ def files(path):
 
 if __name__ == '__main__':
     # app.run("0.0.0.0", 8080, debug=True)
-    controller.move_piece(16, 17, board)
+    await controller.move_piece(16, 17, board)
