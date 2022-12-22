@@ -41,7 +41,7 @@ def get_board():
 
 @app.route('/move', methods=["POST"])
 @response_wrapper
-def move_piece():
+async def move_piece():
     date = request.json
     src = date["src"]
     dst = date["dst"]
