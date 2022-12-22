@@ -23,12 +23,12 @@ class GridControl:
     def move_left_1_centimeter(self):
         self.move_to_coordinates(self.current_x - 10, self.current_y)
 
-    async def move_to_square(self, square_num):
+    def move_to_square(self, square_num):
         row = square_num // 8
         col = square_num % 8
         x = self.offset_left + (col * self.cell_width) + self.cell_width / 2
         y = self.offset_up + (row * self.cell_height) + self.cell_height / 2
-        await self.move_to_coordinates(x, y)
+        self.move_to_coordinates(x, y)
 
     async def move_to_coordinates(self, x, y):
         x_to_move_mm = x - self.current_x
@@ -37,12 +37,13 @@ class GridControl:
         y_steps = y_to_move_mm * self.steps_to_mm_ratio
 
         tasks = []
-        
-        tasks.append(asyncio.create_task(self.vertical_engine.engine_move(x_steps)))
-        tasks.append(asyncio.create_task(self.horizontal_engine.engine_move(y_steps)))
-
-        for task in tasks:
-            await task
+        self.vertical_engine.engine_move(x_steps)
+        self.horizontal_engine.engine_move(y_steps)
+        # tasks.append(asyncio.create_task(self.vertical_engine.engine_move(x_steps)))
+        # tasks.append(asyncio.create_task(self.horizontal_engine.engine_move(y_steps)))
+        # 
+        # for task in tasks:
+        #     await task
             
         self.current_x = x
         self.current_y = y

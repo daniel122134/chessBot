@@ -15,17 +15,17 @@ class WizardsChessController:
         self.grid = GridControl(10, 10, 8, 8, 5, 5, vertical_engine1, horizontal_engine1)
         self.lift = lift
 
-    async def move_piece(self, src, dst, board: Board):
+    def move_piece(self, src, dst, board: Board):
         src_row, src_col = self.square_to_index_tuple(src)
         dst_row, dst_col = self.square_to_index_tuple(dst)
 
         direct_path = self.shortest_not_blocked_path(board, (src_row, src_col), (dst_row, dst_col))
 
         if direct_path:
-            await self.grid.move_to_square(src)
+            self.grid.move_to_square(src)
             self.lift.lift()
             for step in direct_path:
-                await self.grid.move_to_square(self.tuple_to_square(step))
+                self.grid.move_to_square(self.tuple_to_square(step))
             self.lift.lower()
 
     def square_to_index_tuple(self, square):
