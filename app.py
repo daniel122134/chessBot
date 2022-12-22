@@ -3,8 +3,8 @@ import os
 import chess
 from flask import Flask, send_from_directory
 
-from backend.entities.ChessResponse import response_wrapper
-from backend.logic.minMax import MinMax
+from backend.src.entities.ChessResponse import response_wrapper
+from backend.src.logic import MinMax
 
 ROOT_FOLDER = "frontend"
 app = Flask(__name__, static_folder=os.path.join(ROOT_FOLDER, 'static'))

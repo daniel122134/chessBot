@@ -2,7 +2,7 @@ import asyncio
 
 from gpiozero import DigitalOutputDevice
 
-from backend.hal.config.steps_config import prec_configuration_mapping
+from backend.src.hal.config.steps_config import prec_configuration_mapping
 
 INTERVAL = 0.001
 

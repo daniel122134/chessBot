@@ -3,8 +3,8 @@ from collections import deque
 import chess
 from chess import Board
 
-from backend.hal.VerticalLift import VerticalLift
-from backend.hal.grid_control import GridControl
+from backend.src.hal.VerticalLift import VerticalLift
+from backend.src.hal.grid_control import GridControl
 
 directions = [(1, 0), (0, 1), (-1, 0), (0, -1)]
 
