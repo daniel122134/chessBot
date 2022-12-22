@@ -1,17 +1,16 @@
 import os
-import random
 
 import chess
 from flask import Flask, send_from_directory
 
 from backend.entities.ChessResponse import response_wrapper
-from backend.hal.WizardsChessController import WizardsChessController
 from backend.logic.minMax import MinMax
 
 ROOT_FOLDER = "frontend"
 app = Flask(__name__, static_folder=os.path.join(ROOT_FOLDER, 'static'))
 
 board = chess.Board()
+
 
 @app.route('/board', methods=["GET"])
 @response_wrapper
@@ -43,9 +42,8 @@ def make_random_move():
     # moves = board.legal_moves
     # move = random.choice(list(moves))
     # board.push(move)
-    move = MinMax(board,2).get_best_move_for_board()
+    move = MinMax(board, 2).get_best_move_for_board()
     board.push(move)
-
 
 
 @app.route('/', defaults={'path': 'index.html'})
@@ -56,5 +54,3 @@ def files(path):
 
 if __name__ == '__main__':
     app.run("0.0.0.0", 80, debug=True)
-
-    

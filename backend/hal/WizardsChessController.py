@@ -3,14 +3,19 @@ from collections import deque
 import chess
 from chess import Board
 
+from backend.hal.VerticalLift import VerticalLift
 from backend.hal.grid_control import GridControl
 
 directions = [(1, 0), (0, 1), (-1, 0), (0, -1)]
 
 
 class WizardsChessController:
+    LIFT_PIN = 1
+    LOWER_PIN = 2
+
     def __init__(self):
         self.grid = GridControl(10, 10, 8, 8, 5, 5, [], [])
+        self.lift = VerticalLift(self.LIFT_PIN, self.LOWER_PIN)
 
     def move_piece(self, src, dst, board: Board):
         src_row, src_col = self.square_to_index_tuple(src)
@@ -20,10 +25,10 @@ class WizardsChessController:
 
         if direct_path:
             self.grid.move_to_square(src)
-            self.electro.suck()
+            self.lift.lift()
             for step in direct_path:
-                self.grid.move_to_square(step)
-            self.electro.release()
+                self.grid.move_to_square(self.tuple_to_square(step))
+            self.lift.lower()
 
     def square_to_index_tuple(self, square):
         return (square // 8, square % 8)
