@@ -8,7 +8,6 @@ class VerticalLift:
         self.lift_pin_device = DigitalOutputDevice(lift_pin)
         self.lower_pin_device = DigitalOutputDevice(lower_pin)
 
-
     def lift(self):
         self.lift_pin_device.on()
         time.sleep(1)

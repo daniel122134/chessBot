@@ -3,19 +3,17 @@ from collections import deque
 import chess
 from chess import Board
 
-from backend.src.hal.VerticalLift import VerticalLift
+from backend.src.hal.config.devices import lift, vertical_engine1, horizontal_engine1
 from backend.src.hal.grid_control import GridControl
 
 directions = [(1, 0), (0, 1), (-1, 0), (0, -1)]
 
 
 class WizardsChessController:
-    LIFT_PIN = 1
-    LOWER_PIN = 2
 
     def __init__(self):
-        self.grid = GridControl(10, 10, 8, 8, 5, 5, [], [])
-        self.lift = VerticalLift(self.LIFT_PIN, self.LOWER_PIN)
+        self.grid = GridControl(10, 10, 8, 8, 5, 5, vertical_engine1, horizontal_engine1)
+        self.lift = lift
 
     def move_piece(self, src, dst, board: Board):
         src_row, src_col = self.square_to_index_tuple(src)
@@ -56,7 +54,7 @@ class WizardsChessController:
             cell, path = queue.popleft()
             if cell == end:
                 return path
-            for dx, dy in [(0, 1), (0, -1), (1, 0), (-1, 0)]:
+            for dx, dy in directions:
                 x, y = cell[0] + dx, cell[1] + dy
                 square = self.tuple_to_square((x, y))
                 if (x, y) not in visited and 0 <= x < len(matrix) and 0 <= y < len(

@@ -4,7 +4,8 @@ import chess
 from flask import Flask, send_from_directory
 
 from backend.src.entities.ChessResponse import response_wrapper
-from backend.src.logic import MinMax
+from backend.src.hal.WizardsChessController import WizardsChessController
+from backend.src.logic.minMax import MinMax
 
 ROOT_FOLDER = "frontend"
 app = Flask(__name__, static_folder=os.path.join(ROOT_FOLDER, 'static'))
@@ -54,3 +55,5 @@ def files(path):
 
 if __name__ == '__main__':
     app.run("0.0.0.0", 80, debug=True)
+    wizards_chess = WizardsChessController()
+    wizards_chess.move_piece(8, 16, board)

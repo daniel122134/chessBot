@@ -9,7 +9,7 @@ INTERVAL = 0.001
 
 
 class Engine:
-    def __init__(self, step_pin, dir_pin, mode1, mode2, mode3, distance_out, percision=1, direction=True):
+    def __init__(self, step_pin, dir_pin, mode1, mode2, mode3, distance_out=0, percision=1, direction=True):
         self.step_pin = DigitalOutputDevice(step_pin)
         self.dir_pin = DigitalOutputDevice(dir_pin)
         self.mode1 = DigitalOutputDevice(mode1)
