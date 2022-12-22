@@ -1,7 +1,7 @@
 import os
 
 import chess
-from flask import Flask, send_from_directory
+from flask import Flask, send_from_directory, request
 
 from backend.src.entities.ChessResponse import response_wrapper
 from backend.src.hal.WizardsChessController import WizardsChessController
@@ -11,6 +11,7 @@ ROOT_FOLDER = "frontend"
 app = Flask(__name__, static_folder=os.path.join(ROOT_FOLDER, 'static'))
 
 board = chess.Board()
+controller = WizardsChessController()
 
 
 @app.route('/board', methods=["GET"])
@@ -37,12 +38,18 @@ def get_board():
     return serilized_board
 
 
+@app.route('/move', methods=["POST"])
+@response_wrapper
+def move_piece():
+    date = request.json
+    src = date["src"]
+    dst = date["dst"]
+    controller.move_piece(src, dst, board)
+
+
 @app.route('/random', methods=["GET"])
 @response_wrapper
 def make_random_move():
-    # moves = board.legal_moves
-    # move = random.choice(list(moves))
-    # board.push(move)
     move = MinMax(board, 2).get_best_move_for_board()
     board.push(move)
 
@@ -55,5 +62,3 @@ def files(path):
 
 if __name__ == '__main__':
     app.run("0.0.0.0", 80, debug=True)
-    wizards_chess = WizardsChessController()
-    wizards_chess.move_piece(8, 16, board)

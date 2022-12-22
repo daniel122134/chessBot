@@ -43,6 +43,9 @@ class GridControl:
 
         for task in tasks:
             await task
+            
+        self.current_x = x
+        self.current_y = y
 
     def _turn_on_bulb(self):
         pass
