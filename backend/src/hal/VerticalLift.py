@@ -9,10 +9,10 @@ class VerticalLift:
         self.lift_pin_device_neg = DigitalOutputDevice(lift_pin_neg)
         self.lower_pin_device_pos = DigitalOutputDevice(lower_pin_pos)
         self.lower_pin_device_neg = DigitalOutputDevice(lower_pin_neg)
-        self.lift_pin_device_pos.off()
-        self.lift_pin_device_neg.off()
-        self.lower_pin_device_pos.off()
-        self.lower_pin_device_neg.off()
+        self.lift_pin_device_pos.on()
+        self.lift_pin_device_neg.on()
+        self.lower_pin_device_pos.on()
+        self.lower_pin_device_neg.on()
 
     def lift(self):
         self.lift_pin_device_pos.toggle()
