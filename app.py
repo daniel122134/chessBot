@@ -49,15 +49,16 @@ def move_piece():
 
 @app.route('/engineMove', methods=["POST"])
 @response_wrapper
-def move_piece():
+def emove_piece():
     date = request.json
     dir = date["dir"]
     steps = date["steps"]
+    time = date["interval"]
     if dir:
         vertical_engine1.change_dir()
         horizontal_engine1.change_dir()
-    vertical_engine1.engine_move(steps)
-    horizontal_engine1.engine_move(steps)
+    vertical_engine1.engine_move(steps,time)
+    horizontal_engine1.engine_move(steps,time)
     
 
 

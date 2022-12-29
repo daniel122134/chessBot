@@ -1,4 +1,5 @@
 import asyncio
+import time
 
 from gpiozero import DigitalOutputDevice
 
@@ -19,13 +20,14 @@ class Engine:
         self.precision = percision
         self.apply_percision()
 
-    def engine_move(self, steps=100):
-        sleep_time = INTERVAL / self.precision
+    def engine_move(self, steps=100, interval=INTERVAL):
+        sleep_time = interval / self.precision
         if steps < 0:
             self.change_dir()
 
         for i in range(abs(int(steps))):
             self.step_pin.toggle()
+            time.sleep(interval)
             # await asyncio.sleep(sleep_time)
             if self.direction:
                 self.distance_out += 1 / self.precision
