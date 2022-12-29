@@ -26,10 +26,8 @@ class Engine:
             self.change_dir()
 
         for i in range(abs(int(steps))):
-            self.step_pin.on()
+            self.step_pin.toggle()
             time.sleep(interval)
-            self.step_pin.off()
-            time.sleep(interval*100)
             # await asyncio.sleep(sleep_time)
             if self.direction:
                 self.distance_out += 1 / self.precision
