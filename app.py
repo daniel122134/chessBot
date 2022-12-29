@@ -5,6 +5,7 @@ from flask import Flask, send_from_directory, request
 
 from backend.src.entities.ChessResponse import response_wrapper
 from backend.src.hal.WizardsChessController import WizardsChessController
+from backend.src.hal.config.devices import vertical_engine1, horizontal_engine1
 from backend.src.logic.minMax import MinMax
 
 ROOT_FOLDER = "frontend"
@@ -45,6 +46,20 @@ def move_piece():
     src = date["src"]
     dst = date["dst"]
     controller.move_piece(src, dst, board)
+
+@app.route('/engineMove', methods=["POST"])
+@response_wrapper
+def move_piece():
+    date = request.json
+    dir = date["dir"]
+    steps = date["steps"]
+    if dir:
+        vertical_engine1.change_dir()
+        horizontal_engine1.change_dir()
+    vertical_engine1.engine_move(steps)
+    horizontal_engine1.engine_move(steps)
+    
+
 
 
 @app.route('/random', methods=["GET"])

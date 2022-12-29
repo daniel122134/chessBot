@@ -19,15 +19,15 @@ class WizardsChessController:
         src_row, src_col = self.square_to_index_tuple(src)
         dst_row, dst_col = self.square_to_index_tuple(dst)
 
-        # direct_path = self.shortest_not_blocked_path(board, (src_row, src_col), (dst_row, dst_col))
+        direct_path = self.shortest_not_blocked_path(board, (src_row, src_col), (dst_row, dst_col))
 
-        # if direct_path:
-        self.grid.move_to_square(src)
-        self.lift.lift()
-        # for step in direct_path:
-        #     print(step)
-        self.grid.move_to_square(self.tuple_to_square((5,5)))
-        self.lift.lower()
+        if direct_path:
+            self.grid.move_to_square(src)
+            self.lift.lift()
+            for step in direct_path:
+                print(step)
+                self.grid.move_to_square(self.tuple_to_square(step))
+            self.lift.lower()
 
     def square_to_index_tuple(self, square):
         return (square // 8, square % 8)
