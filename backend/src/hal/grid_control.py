@@ -42,9 +42,9 @@ class GridControl:
             # engine.engine_move(x_steps)
             tasks.append(asyncio.create_task(engine.engine_move(x_steps)))
 
-        for engine in self.horizontal_engines:
-            # engine.engine_move(y_steps)
-            tasks.append(asyncio.create_task(engine.engine_move(y_steps)))
+        # for engine in self.horizontal_engines:
+        #     # engine.engine_move(y_steps)
+        #     tasks.append(asyncio.create_task(engine.engine_move(y_steps)))
 
         for task in tasks:
             await task
