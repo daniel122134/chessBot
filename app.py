@@ -5,7 +5,7 @@ from flask import Flask, send_from_directory, request
 
 from backend.src.entities.ChessResponse import response_wrapper
 from backend.src.hal.WizardsChessController import WizardsChessController
-from backend.src.hal.config.devices import vertical_engine1, horizontal_engine1
+from backend.src.hal.config.devices import vertical_engine1, horizontal_engine1, vertical_engine2
 from backend.src.logic.minMax import MinMax
 
 ROOT_FOLDER = "frontend"
@@ -58,6 +58,7 @@ def emove_piece():
         vertical_engine1.change_dir()
         horizontal_engine1.change_dir()
     vertical_engine1.engine_move(steps,time)
+    vertical_engine2.engine_move(steps,time)
     horizontal_engine1.engine_move(steps,time)
     
 
