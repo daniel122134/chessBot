@@ -15,6 +15,8 @@ class Engine:
 
         self.distance_out = distance_out
         self.direction = direction
+        if direction:
+            self.change_dir()
 
     async def engine_move(self, steps=100, interval=INTERVAL):
         sleep_time = interval 
