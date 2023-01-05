@@ -7,7 +7,7 @@ DIR_PIN_1 = 24
 vertical_engine1 = Engine(STEP_PIN_1, DIR_PIN_1, direction=False)
 
 
-STEP_PIN_2 = 6
+STEP_PIN_2 = 2
 DIR_PIN_2 = 23
 vertical_engine2 = Engine(STEP_PIN_2, DIR_PIN_2)
 
