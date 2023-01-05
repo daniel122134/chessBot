@@ -48,11 +48,18 @@ def move_piece():
     dst = date["dst"]
     controller.move_piece(src, dst, board)
 
+x = [10, 15]
+ii=0
 @app.route('/engineMove', methods=["POST"])
 @response_wrapper
 def emove_piece():
     date = request.json
-    asyncio.run(controller.grid.move_to_coordinates(10, 10))
+    global ii
+    if ii:
+        ii=0
+    else:
+        ii=1
+    asyncio.run(controller.grid.move_to_coordinates(x[ii], x[ii]))
 
     # dir = date["dir"]
     # steps = date["steps"]
