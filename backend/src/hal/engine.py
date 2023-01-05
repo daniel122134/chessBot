@@ -20,15 +20,15 @@ class Engine:
         self.precision = percision
         # self.apply_percision()
 
-    async def engine_move(self, steps=100, interval=INTERVAL):
+    def engine_move(self, steps=100, interval=INTERVAL):
         sleep_time = interval / self.precision
         if steps < 0:
             self.change_dir()
 
         for i in range(abs(int(steps))):
             self.step_pin.toggle()
-            # time.sleep(interval)
-            await asyncio.sleep(sleep_time)
+            time.sleep(interval)
+            # await asyncio.sleep(interval)
             if self.direction:
                 self.distance_out += 1 / self.precision
             else:
