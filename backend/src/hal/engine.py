@@ -20,6 +20,7 @@ class Engine:
         sleep_time = interval 
         print(steps)
         print(self.direction)
+        print(self.dir_pin.is_active)
         if steps < 0:
             self.change_dir()
 
