@@ -4,12 +4,12 @@ from backend.src.hal.engine import Engine
 
 STEP_PIN_1 = 25
 DIR_PIN_1 = 24
-vertical_engine1 = Engine(STEP_PIN_1, DIR_PIN_1, direction=False)
+vertical_engine1 = Engine(STEP_PIN_1, DIR_PIN_1, direction=True, distance_out=10)
 
 
 STEP_PIN_2 = 18
 DIR_PIN_2 = 23
-vertical_engine2 = Engine(STEP_PIN_2, DIR_PIN_2)
+vertical_engine2 = Engine(STEP_PIN_2, DIR_PIN_2, distance_out=10)
 
 
 STEP_PIN_HOR = 15
