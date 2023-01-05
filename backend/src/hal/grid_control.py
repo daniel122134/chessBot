@@ -2,7 +2,7 @@ import asyncio
 
 
 class GridControl:
-    def __init__(self, cell_width, cell_height, row_count, col_count, offset_up, offset_left, vertical_engines,
+    def __init__(self,cell_length, row_count, col_count, offset_up, offset_left, vertical_engines,
                  horizontal_engines):
         self.horizontal_engines = horizontal_engines
         self.vertical_engines = vertical_engines
@@ -10,8 +10,7 @@ class GridControl:
         self.offset_up = offset_up
         self.col_count = col_count
         self.row_count = row_count
-        self.cell_height = cell_height
-        self.cell_width = cell_width
+        self.cell_length = cell_length
 
         self.current_x = 15
         self.current_y = 15
@@ -26,23 +25,21 @@ class GridControl:
     def move_to_square(self, square_num):
         row = square_num // 8
         col = square_num % 8
-        x = self.offset_left + (col * self.cell_width) + self.cell_width / 2
-        y = self.offset_up + (row * self.cell_height) + self.cell_height / 2
+        x = self.offset_left + (col * self.cell_length) + self.cell_length / 2
+        y = self.offset_up + (row * self.cell_length) + self.cell_length / 2
         asyncio.run(self.move_to_coordinates(x, y))
         
 
     async def move_to_coordinates(self, x, y):
-        x_to_move_mm = x - self.current_x
-        y_to_move_mm = y - self.current_y
-        x_steps = x_to_move_mm * self.steps_to_mm_ratio
-        y_steps = y_to_move_mm * self.steps_to_mm_ratio
+        x_to_move = x - self.current_x
+        y_to_move = y - self.current_y
 
         tasks = []
         for engine in self.vertical_engines:
-            tasks.append(asyncio.create_task(engine.engine_move(x_steps)))
+            tasks.append(asyncio.create_task(engine.engine_move(x_to_move)))
 
         for engine in self.horizontal_engines:
-            tasks.append(asyncio.create_task(engine.engine_move(y_steps)))
+            tasks.append(asyncio.create_task(engine.engine_move(y_to_move)))
 
         for task in tasks:
             await task
