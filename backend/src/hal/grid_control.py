@@ -28,11 +28,10 @@ class GridControl:
         col = square_num % 8
         x = self.offset_left + (col * self.cell_width) + self.cell_width / 2
         y = self.offset_up + (row * self.cell_height) + self.cell_height / 2
-        self.move_to_coordinates(x, y)
-        # asyncio.run(self.move_to_coordinates(x, y))
+        asyncio.run(self.move_to_coordinates(x, y))
         
 
-    def move_to_coordinates(self, x, y):
+    async def move_to_coordinates(self, x, y):
         x_to_move_mm = x - self.current_x
         y_to_move_mm = y - self.current_y
         x_steps = x_to_move_mm * self.steps_to_mm_ratio
@@ -40,15 +39,15 @@ class GridControl:
 
         tasks = []
         for engine in self.vertical_engines:
-            engine.engine_move(x_steps)
-        #     tasks.append(asyncio.create_task(engine.engine_move(x_steps)))
+            # engine.engine_move(x_steps)
+            tasks.append(asyncio.create_task(engine.engine_move(x_steps)))
 
         for engine in self.horizontal_engines:
-            engine.engine_move(y_steps)
-            # tasks.append(asyncio.create_task(engine.engine_move(y_steps)))
+            # engine.engine_move(y_steps)
+            tasks.append(asyncio.create_task(engine.engine_move(y_steps)))
 
-        # for task in tasks:
-        #     await task
+        for task in tasks:
+            await task
 
         self.current_x = x
         self.current_y = y

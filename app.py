@@ -1,3 +1,4 @@
+import asyncio
 import os
 
 import chess
@@ -51,15 +52,19 @@ def move_piece():
 @response_wrapper
 def emove_piece():
     date = request.json
-    dir = date["dir"]
-    steps = date["steps"]
-    time = date["interval"]
-    if dir:
-        vertical_engine1.change_dir()
-        horizontal_engine1.change_dir()
-    vertical_engine1.engine_move(steps,time)
-    vertical_engine2.engine_move(steps,time)
-    horizontal_engine1.engine_move(steps,time)
+    asyncio.run(controller.grid.move_to_coordinates(10, 10))
+
+    # dir = date["dir"]
+    # steps = date["steps"]
+    # time = date["interval"]
+    # if dir:
+    #     vertical_engine1.change_dir()
+    #     horizontal_engine1.change_dir()
+    # 
+    # 
+    # vertical_engine1.engine_move(steps,time)
+    # vertical_engine2.engine_move(steps,time)
+    # horizontal_engine1.engine_move(steps,time)
     
 
 
