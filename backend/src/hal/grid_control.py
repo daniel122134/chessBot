@@ -2,10 +2,10 @@ import asyncio
 
 
 class GridControl:
-    def __init__(self, cell_width, cell_height, row_count, col_count, offset_up, offset_left, vertical_engine,
-                 horizontal_engine):
-        self.horizontal_engine = horizontal_engine
-        self.vertical_engine = vertical_engine
+    def __init__(self, cell_width, cell_height, row_count, col_count, offset_up, offset_left, vertical_engines,
+                 horizontal_engines):
+        self.horizontal_engines = horizontal_engines
+        self.vertical_engines = vertical_engines
         self.offset_left = offset_left
         self.offset_up = offset_up
         self.col_count = col_count
@@ -18,33 +18,35 @@ class GridControl:
         self.steps_to_mm_ratio = 100
 
     def move_up_1_centimeter(self):
-        self.move_to_coordinates(self.current_x, self.current_y - 10)
+        asyncio.run(self.move_to_coordinates(self.current_x, self.current_y - 10))
 
     def move_left_1_centimeter(self):
-        self.move_to_coordinates(self.current_x - 10, self.current_y)
+        asyncio.run(self.move_to_coordinates(self.current_x - 10, self.current_y))
 
     def move_to_square(self, square_num):
         row = square_num // 8
         col = square_num % 8
         x = self.offset_left + (col * self.cell_width) + self.cell_width / 2
         y = self.offset_up + (row * self.cell_height) + self.cell_height / 2
-        self.move_to_coordinates(x, y)
+        asyncio.run(self.move_to_coordinates(x, y))
+        
 
-    def move_to_coordinates(self, x, y):
+    async def move_to_coordinates(self, x, y):
         x_to_move_mm = x - self.current_x
         y_to_move_mm = y - self.current_y
         x_steps = x_to_move_mm * self.steps_to_mm_ratio
         y_steps = y_to_move_mm * self.steps_to_mm_ratio
 
         tasks = []
-        self.vertical_engine.engine_move(x_steps)
-        self.horizontal_engine.engine_move(y_steps)
-        # tasks.append(asyncio.create_task(self.vertical_engine.engine_move(x_steps)))
-        # tasks.append(asyncio.create_task(self.horizontal_engine.engine_move(y_steps)))
-        # 
-        # for task in tasks:
-        #     await task
-            
+        for engine in self.vertical_engines:
+            tasks.append(asyncio.create_task(engine.engine_move(x_steps)))
+
+        for engine in self.horizontal_engines:
+            tasks.append(asyncio.create_task(engine.engine_move(y_steps)))
+
+        for task in tasks:
+            await task
+
         self.current_x = x
         self.current_y = y
 
