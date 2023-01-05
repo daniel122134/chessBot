@@ -2,14 +2,14 @@ from backend.src.hal.VerticalLift import VerticalLift
 from backend.src.hal.engine import Engine
 
 
-STEP_PIN_VER = 25
-DIR_PIN_VER = 24
-vertical_engine1 = Engine(STEP_PIN_VER, DIR_PIN_VER, direction=False)
+STEP_PIN_1 = 25
+DIR_PIN_1 = 24
+vertical_engine1 = Engine(STEP_PIN_1, DIR_PIN_1, direction=False)
 
 
-STEP_PIN_VER = 5
-DIR_PIN_VER = 23
-vertical_engine2 = Engine(STEP_PIN_VER, DIR_PIN_VER)
+STEP_PIN_2 = 5
+DIR_PIN_2 = 23
+vertical_engine2 = Engine(STEP_PIN_2, DIR_PIN_2)
 
 
 STEP_PIN_HOR = 15
