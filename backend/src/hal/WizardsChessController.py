@@ -3,7 +3,7 @@ from collections import deque
 import chess
 from chess import Board
 
-from backend.src.hal.config.devices import lift, vertical_engine1, horizontal_engine1
+from backend.src.hal.config.devices import lift, vertical_engines, horizontal_engines
 from backend.src.hal.grid_control import GridControl
 
 directions = [(1, 0), (0, 1), (-1, 0), (0, -1)]
