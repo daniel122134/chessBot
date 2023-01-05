@@ -13,8 +13,8 @@ class GridControl:
         self.cell_height = cell_height
         self.cell_width = cell_width
 
-        self.current_x = 1500
-        self.current_y = 1500
+        self.current_x = 15
+        self.current_y = 15
         self.steps_to_mm_ratio = 100
 
     def move_up_1_centimeter(self):
