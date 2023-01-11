@@ -70,13 +70,12 @@ def play_an_auto_game():
     while True:
         if board.is_game_over():
             return "game over"
-        
-        move = MinMax(board, 2).get_best_move_for_board()
-        if move:
+
+        move = random.choice(list(board.legal_moves))
+        print(move)
+        path = controller.move_piece(move.from_square, move.to_square, board)
+        if path:
             board.push(move)
-            asyncio.run(controller.move_piece(move.from_square, move.to_square, board))
-        else:
-            return "no more moves"
 
 
 @app.route('/', defaults={'path': 'index.html'})
