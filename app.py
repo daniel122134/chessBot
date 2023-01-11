@@ -1,12 +1,13 @@
 import asyncio
 import os
+import time
 
 import chess
-from flask import Flask, send_from_directory, request
+from flask import Flask, send_from_directory
 
 from backend.src.entities.ChessResponse import response_wrapper
 from backend.src.hal.WizardsChessController import WizardsChessController
-from backend.src.hal.config.devices import vertical_engine1, horizontal_engine1, vertical_engine2
+from backend.src.hal.config.devices import lift
 from backend.src.logic.minMax import MinMax
 
 ROOT_FOLDER = "frontend"
@@ -40,40 +41,12 @@ def get_board():
     return serilized_board
 
 
-@app.route('/move', methods=["POST"])
+@app.route('/lift', methods=["GET"])
 @response_wrapper
-def move_piece():
-    date = request.json
-    src = date["src"]
-    dst = date["dst"]
-    controller.move_piece(src, dst, board)
-
-x = [10, 15]
-ii=0
-@app.route('/engineMove', methods=["POST"])
-@response_wrapper
-def emove_piece():
-    date = request.json
-    global ii
-    if ii:
-        ii=0
-    else:
-        ii=1
-    asyncio.run(controller.grid.move_to_coordinates(x[ii], x[ii]))
-
-    # dir = date["dir"]
-    # steps = date["steps"]
-    # time = date["interval"]
-    # if dir:
-    #     vertical_engine1.change_dir()
-    #     horizontal_engine1.change_dir()
-    # 
-    # 
-    # vertical_engine1.engine_move(steps,time)
-    # vertical_engine2.engine_move(steps,time)
-    # horizontal_engine1.engine_move(steps,time)
-    
-
+def lift_togole():
+    lift.lift()
+    time.sleep(20)
+    lift.lower()
 
 
 @app.route('/random', methods=["GET"])
@@ -81,6 +54,22 @@ def emove_piece():
 def make_random_move():
     move = MinMax(board, 2).get_best_move_for_board()
     board.push(move)
+    asyncio.run(controller.move_piece(move.from_square, move.to_square, board))
+
+
+@app.route('/randomEndless', methods=["GET"])
+@response_wrapper
+def play_an_auto_game():
+    while True:
+        if board.is_game_over():
+            return "game over"
+        
+        move = MinMax(board, 2).get_best_move_for_board()
+        if move:
+            board.push(move)
+            asyncio.run(controller.move_piece(move.from_square, move.to_square, board))
+        else:
+            return "no more moves"
 
 
 @app.route('/', defaults={'path': 'index.html'})
@@ -91,4 +80,4 @@ def files(path):
 
 if __name__ == '__main__':
     app.run("0.0.0.0", 8080, debug=True)
-    # controller.move_piece(16, 17, board)
+
