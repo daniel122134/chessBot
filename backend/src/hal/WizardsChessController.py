@@ -20,7 +20,7 @@ class WizardsChessController:
         dst_row, dst_col = self.square_to_index_tuple(dst)
 
         direct_path = self.shortest_not_blocked_path(board, (src_row, src_col), (dst_row, dst_col))
-
+        print(direct_path)
         if direct_path:
             self.grid.move_to_square(src)
             self.lift.lift()
@@ -28,6 +28,8 @@ class WizardsChessController:
                 print(step)
                 self.grid.move_to_square(self.tuple_to_square(step))
             self.lift.lower()
+        else:
+            print("no direct path found")
 
     def square_to_index_tuple(self, square):
         return (square // 8, square % 8)

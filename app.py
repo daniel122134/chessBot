@@ -52,7 +52,7 @@ def lift_togole():
 @app.route('/random', methods=["GET"])
 @response_wrapper
 def make_random_move():
-    move = MinMax(board, 2).get_best_move_for_board()
+    move = MinMax(board, 1).get_best_move_for_board()
     print(move)
     board.push(move)
     print(move.from_square)
