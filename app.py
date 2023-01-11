@@ -1,5 +1,6 @@
 import asyncio
 import os
+import random
 import time
 
 import chess
@@ -52,8 +53,8 @@ def lift_togole():
 @app.route('/random', methods=["GET"])
 @response_wrapper
 def make_random_move():
-    move = MinMax(board, 1).get_best_move_for_board()
-    print(list(board.legal_moves))
+    # move = MinMax(board, 1).get_best_move_for_board()
+    move = random.choice(list(board.legal_moves))
     print(move)
     board.push(move)
     print(move.from_square)
