@@ -62,6 +62,11 @@ def make_random_move():
     if path:
         board.push(move)
 
+@app.route('/reset', methods=["GET"])
+@response_wrapper
+def reset():
+    controller.grid.move_up_1_centimeter()
+    controller.grid.move_left_1_centimeter()
 
 
 @app.route('/randomEndless', methods=["GET"])
