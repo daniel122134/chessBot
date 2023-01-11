@@ -56,10 +56,12 @@ def make_random_move():
     # move = MinMax(board, 1).get_best_move_for_board()
     move = random.choice(list(board.legal_moves))
     print(move)
-    board.push(move)
     print(move.from_square)
     print(move.to_square)
-    controller.move_piece(move.from_square, move.to_square, board)
+    path = controller.move_piece(move.from_square, move.to_square, board)
+    if path:
+        board.push(move)
+
 
 
 @app.route('/randomEndless', methods=["GET"])

@@ -30,6 +30,7 @@ class WizardsChessController:
             self.lift.lower()
         else:
             print("no direct path found")
+        return direct_path
 
     def square_to_index_tuple(self, square):
         return (square // 8, square % 8)
