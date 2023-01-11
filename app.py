@@ -53,7 +53,10 @@ def lift_togole():
 @response_wrapper
 def make_random_move():
     move = MinMax(board, 2).get_best_move_for_board()
+    print(move)
     board.push(move)
+    print(move.from_square)
+    print(move.to_square)
     asyncio.run(controller.move_piece(move.from_square, move.to_square, board))
 
 
