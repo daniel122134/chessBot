@@ -53,6 +53,7 @@ def lift_togole():
 @response_wrapper
 def make_random_move():
     move = MinMax(board, 1).get_best_move_for_board()
+    print(list(board.legal_moves))
     print(move)
     board.push(move)
     print(move.from_square)
