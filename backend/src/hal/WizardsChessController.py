@@ -11,7 +11,7 @@ directions = [(1, 0), (0, 1), (-1, 0), (0, -1)]
 class WizardsChessController:
 
     def __init__(self):
-        self.grid = GridControl(10, 8, 8, 5, 5, vertical_engines, horizontal_engines)
+        self.grid = GridControl(10, 8, 8, 0, 0, vertical_engines, horizontal_engines)
         self.lift = lift
 
     def move_piece(self, src, dst, piece_map):
