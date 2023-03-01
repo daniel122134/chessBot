@@ -17,7 +17,7 @@ DIR_PIN_HOR = 14
 horizontal_engine1 = Engine(STEP_PIN_HOR, DIR_PIN_HOR)
 
 horizontal_engines = [horizontal_engine1]
-vertical_engines = [vertical_engine1, vertical_engine2]
+vertical_engines = [vertical_engine2,vertical_engine1]
 
 LIFT_PIN_POS = 27
 LOWER_PIN_POS = 22
