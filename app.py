@@ -58,7 +58,7 @@ def make_random_move():
     print(move)
     print(move.from_square)
     print(move.to_square)
-    path = controller.move_piece(move.from_square, move.to_square, board)
+    path = controller.move_piece(move.from_square, move.to_square, board.piece_map())
     if path:
         board.push(move)
 
@@ -91,7 +91,7 @@ def play_an_auto_game():
 
         move = random.choice(list(board.legal_moves))
         print(move)
-        path = controller.move_piece(move.from_square, move.to_square, board)
+        path = controller.move_piece(move.from_square, move.to_square, board.piece_map())
         if path:
             board.push(move)
 
