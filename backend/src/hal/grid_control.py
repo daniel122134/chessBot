@@ -44,8 +44,8 @@ class GridControl:
         for task in tasks:
             await task
 
-        self.current_x = x
-        self.current_y = y
+        self.current_x = max(0,x)
+        self.current_y = max(0,y)
 
     def _turn_on_bulb(self):
         pass
