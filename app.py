@@ -76,7 +76,7 @@ def left():
 @app.route('/right', methods=["GET"])
 @response_wrapper
 def right():
-    controller.grid.move_left_1_centimeter()
+    controller.grid.move_right_1_centimeter()
 
 
 @app.route('/corners', methods=["GET"])

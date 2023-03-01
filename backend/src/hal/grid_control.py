@@ -21,6 +21,9 @@ class GridControl:
 
     def move_left_1_centimeter(self):
         asyncio.run(self.move_to_coordinates(self.current_x - 10, self.current_y))
+    def move_right_1_centimeter(self):
+        asyncio.run(self.move_to_coordinates(self.current_x + 10, self.current_y))
+
 
     def move_to_square(self, square_num):
         row = square_num // 8
