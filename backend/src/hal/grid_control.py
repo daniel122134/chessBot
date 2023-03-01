@@ -14,7 +14,7 @@ class GridControl:
 
         self.current_x = 0
         self.current_y = 0
-        self.steps_to_mm_ratio = 35
+        self.steps_to_mm_ratio = 30
 
     def move_up_1_centimeter(self):
         asyncio.run(self.move_to_coordinates(self.current_x, self.current_y - 10))
