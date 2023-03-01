@@ -90,7 +90,7 @@ def corners():
         controller.grid.move_to_square(63)
         time.sleep(1)
         controller.grid.move_to_square(56)
-        time.sleep(10)
+        time.sleep(1)
 
 
 @app.route('/randomEndless', methods=["GET"])
