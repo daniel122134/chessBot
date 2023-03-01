@@ -5,7 +5,7 @@ from gpiozero import DigitalOutputDevice
 
 from backend.src.hal.config.steps_config import prec_configuration_mapping
 
-INTERVAL = 0.0001
+INTERVAL = 0.001
 
 
 class Engine:
