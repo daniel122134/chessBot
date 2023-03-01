@@ -68,6 +68,19 @@ def reset():
     controller.grid.move_up_1_centimeter()
     controller.grid.move_left_1_centimeter()
 
+@app.route('/corners', methods=["GET"])
+@response_wrapper
+def reset():
+    for i in range(4):
+        controller.grid.move_to_square(0)
+        time.sleep(1)
+        controller.grid.move_to_square(7)
+        time.sleep(1)
+        controller.grid.move_to_square(63)
+        time.sleep(1)
+        controller.grid.move_to_square(56)
+        time.sleep(10)
+
 
 @app.route('/randomEndless', methods=["GET"])
 @response_wrapper
