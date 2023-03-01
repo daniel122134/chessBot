@@ -20,8 +20,6 @@ class Engine:
 
     async def engine_move(self, steps=100, interval=INTERVAL):
         sleep_time = interval 
-        print(steps)
-        print(self.direction)
         if steps < 0:
             self.change_dir()
 
