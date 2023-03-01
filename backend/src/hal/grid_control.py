@@ -12,8 +12,8 @@ class GridControl:
         self.row_count = row_count
         self.cell_length = cell_length
 
-        self.current_x = 15
-        self.current_y = 15
+        self.current_x = 0
+        self.current_y = 0
         self.steps_to_mm_ratio = 100
 
     def move_up_1_centimeter(self):
@@ -33,14 +33,13 @@ class GridControl:
     async def move_to_coordinates(self, x, y):
         x_to_move = x - self.current_x
         y_to_move = y - self.current_y
-        step_mm_ratio = 10
 
         tasks = []
         for engine in self.vertical_engines:
-            tasks.append(asyncio.create_task(engine.engine_move(x_to_move*step_mm_ratio)))
+            tasks.append(asyncio.create_task(engine.engine_move(x_to_move*self.steps_to_mm_ratio)))
 
         for engine in self.horizontal_engines:
-            tasks.append(asyncio.create_task(engine.engine_move(y_to_move*step_mm_ratio)))
+            tasks.append(asyncio.create_task(engine.engine_move(y_to_move*self.steps_to_mm_ratio)))
 
         for task in tasks:
             await task
