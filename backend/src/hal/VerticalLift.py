@@ -17,7 +17,7 @@ class VerticalLift:
     def lift(self):
         self.lift_pin_device_pos.toggle()
         self.lift_pin_device_neg.toggle()
-        time.sleep(1)
+        time.sleep(0.8)
         self.lift_pin_device_pos.toggle()
         self.lift_pin_device_neg.toggle()
 
