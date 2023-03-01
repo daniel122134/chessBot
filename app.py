@@ -102,9 +102,9 @@ def play_an_auto_game():
 
         move = random.choice(list(board.legal_moves))
         print(move)
-        path = controller.move_piece(move.from_square, move.to_square, board.piece_map())
-        if path:
-            board.push(move)
+        print(move)
+        controller.move_piece(move.from_square, move.to_square, board.piece_map())
+        board.push(move)
 
 
 @app.route('/', defaults={'path': 'index.html'})
