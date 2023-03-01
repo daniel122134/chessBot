@@ -70,7 +70,7 @@ def reset():
 
 @app.route('/corners', methods=["GET"])
 @response_wrapper
-def reset():
+def corners():
     for i in range(4):
         controller.grid.move_to_square(0)
         time.sleep(1)
