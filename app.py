@@ -72,7 +72,13 @@ def reset():
 @response_wrapper
 def left():
     controller.grid.move_left_1_centimeter()
-    
+
+@app.route('/right', methods=["GET"])
+@response_wrapper
+def right():
+    controller.grid.move_left_1_centimeter()
+
+
 @app.route('/corners', methods=["GET"])
 @response_wrapper
 def corners():
