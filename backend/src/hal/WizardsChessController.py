@@ -111,7 +111,7 @@ class WizardsChessController:
                 if src_curr_square != farthest_square_with_direct_path:
                     self.move_piece(src_curr_square, farthest_square_with_direct_path, piece_map)
                     src_curr_square = farthest_square_with_direct_path
-                self.free_way(cell, piece_map, extra_moves_stack)
+                self.free_way(cell, piece_map, extra_moves_stack, dst)
             farthest_square_with_direct_path = square
 
         if src_curr_square != dst:
@@ -121,8 +121,8 @@ class WizardsChessController:
             (empty_cell, cell) = extra_moves_stack.pop()
             self.move_piece(self.tuple_to_square(cell), self.tuple_to_square(empty_cell), piece_map)
 
-    def free_way(self, cell, piece_map, moves_stack):
-        path_to_empty_cell = self.shortest_path_to_empty_cell(piece_map, cell)
+    def free_way(self, cell, piece_map, moves_stack, dst):
+        path_to_empty_cell = self.shortest_path_to_empty_cell(piece_map, cell, dst)
         empty_cell = path_to_empty_cell[-1]
         path_to_empty_cell.reverse()
         cells_to_move = path_to_empty_cell[1:]
@@ -132,7 +132,7 @@ class WizardsChessController:
             self.move_piece(self.tuple_to_square(cell), self.tuple_to_square(empty_cell), piece_map)
             empty_cell = cell
 
-    def shortest_path_to_empty_cell(self, piece_map, start):
+    def shortest_path_to_empty_cell(self, piece_map, start, dst):
 
         matrix = [[1 + x + y * 8 for x in range(8)] for y in range(8)]
 
@@ -150,8 +150,7 @@ class WizardsChessController:
                 return path
             for dx, dy in directions:
                 x, y = cell[0] + dx, cell[1] + dy
-                if (x, y) not in visited and 0 <= x < len(matrix) and 0 <= y < len(
-                        matrix[0]):
+                if (x, y) not in visited and 0 <= x < len(matrix) and 0 <= y < len(matrix[0]) and (x, y) != dst:
                     visited.add((x, y))
                     queue.append(((x, y), path + [(x, y)]))
 
