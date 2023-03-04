@@ -110,6 +110,8 @@ def play_an_auto_game():
 @response_wrapper
 def map_bord():
     controller.lift.lower()
+    time.sleep(1)
+    controller.lift.lift()
     for i in range(64):
         controller.grid.move_to_square(i)
         time.sleep(3)
