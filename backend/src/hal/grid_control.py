@@ -34,6 +34,7 @@ class GridControl:
         
 
     async def move_to_coordinates(self, x, y):
+        print("moving to {},{} from {},{}".format(x, y, self.current_x, self.current_y))
         x_to_move = x - self.current_x
         y_to_move = y - self.current_y
 
