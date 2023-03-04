@@ -2,8 +2,8 @@ from collections import deque
 
 import chess
 
-# from backend.src.hal.config.devices import lift, vertical_engines, horizontal_engines
-# from backend.src.hal.grid_control import GridControl
+from backend.src.hal.config.devices import lift, vertical_engines, horizontal_engines
+from backend.src.hal.grid_control import GridControl
 
 directions = [(1, 0), (0, 1), (-1, 0), (0, -1)]
 
@@ -11,8 +11,8 @@ directions = [(1, 0), (0, 1), (-1, 0), (0, -1)]
 class WizardsChessController:
 
     def __init__(self):
-        # self.grid = GridControl(10, 8, 8, 0, 0, vertical_engines, horizontal_engines)
-        # self.lift = lift
+        self.grid = GridControl(10, 8, 8, 0, 0, vertical_engines, horizontal_engines)
+        self.lift = lift
         self.dimensions =8
 
     def move_piece(self, src, dst, piece_map):
