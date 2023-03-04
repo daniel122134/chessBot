@@ -79,10 +79,19 @@ def left():
 def right():
     controller.grid.move_right_1_centimeter()
 
+@app.route('/validate', methods=["GET"])
+@response_wrapper
+def corners():
+    controller.lift.lift()
+    controller.grid.move_to_square(0)
+    controller.lift.lower()
+
 
 @app.route('/corners', methods=["GET"])
 @response_wrapper
 def corners():
+    controller.lift.lift()
+
     for i in range(4):
         controller.grid.move_to_square(0)
         time.sleep(1)
@@ -92,6 +101,8 @@ def corners():
         time.sleep(1)
         controller.grid.move_to_square(56)
         time.sleep(1)
+        
+    controller.lift.lower()
 
 
 @app.route('/randomEndless', methods=["GET"])
