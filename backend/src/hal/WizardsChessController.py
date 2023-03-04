@@ -2,8 +2,8 @@ from collections import deque
 
 import chess
 
-from backend.src.hal.config.devices import lift, vertical_engines, horizontal_engines
-from backend.src.hal.grid_control import GridControl
+# from backend.src.hal.config.devices import lift, vertical_engines, horizontal_engines
+# from backend.src.hal.grid_control import GridControl
 
 directions = [(1, 0), (0, 1), (-1, 0), (0, -1)]
 
@@ -11,8 +11,9 @@ directions = [(1, 0), (0, 1), (-1, 0), (0, -1)]
 class WizardsChessController:
 
     def __init__(self):
-        self.grid = GridControl(10, 8, 8, 0, 0, vertical_engines, horizontal_engines)
-        self.lift = lift
+        # self.grid = GridControl(10, 8, 8, 0, 0, vertical_engines, horizontal_engines)
+        # self.lift = lift
+        self.dimensions =8
 
     def move_piece(self, src, dst, piece_map):
         src_cell = self.square_to_index_tuple(src)
@@ -39,10 +40,9 @@ class WizardsChessController:
 
     def shortest_not_blocked_path(self, piece_map, start, end):
         # Check if the start and end points are valid
-        matrix = [[1 + x + y * 8 for x in range(8)] for y in range(8)]  # todo move 8 to self
 
-        if not (0 <= start[0] < len(matrix) and 0 <= start[1] < len(matrix[0]) and
-                0 <= end[0] < len(matrix) and 0 <= end[1] < len(matrix[0])):
+        if not (0 <= start[0] < self.dimensions and 0 <= start[1] < self.dimensions and
+                0 <= end[0] < self.dimensions and 0 <= end[1] < self.dimensions):
             return []
 
         # Create a queue to store the visited cells and their paths
@@ -59,48 +59,59 @@ class WizardsChessController:
             for dx, dy in directions:
                 x, y = cell[0] + dx, cell[1] + dy
                 square = self.tuple_to_square((x, y))
-                if (x, y) not in visited and 0 <= x < len(matrix) and 0 <= y < len(
-                        matrix[0]) and square not in piece_map:
+                if (x, y) not in visited and 0 <= x < self.dimensions and 0 <= y < self.dimensions and square not in piece_map:
                     visited.add((x, y))
                     queue.append(((x, y), path + [(x, y)]))
 
         # Return an empty path if no path is found
         return []
 
-    def blocked_path(self, start, end):
+    def blocked_path(self, start, end, piece_map, allowed_block_count=0):
         # Check if the start and end points are valid
-        matrix = [[1 + x + y * 8 for x in range(8)] for y in range(8)]  # todo move 8 to self
-
-        if not (0 <= start[0] < len(matrix) and 0 <= start[1] < len(matrix[0]) and
-                0 <= end[0] < len(matrix) and 0 <= end[1] < len(matrix[0])):
+        if not (0 <= start[0] < self.dimensions and 0 <= start[1] < self.dimensions and
+                0 <= end[0] < self.dimensions and 0 <= end[1] < self.dimensions):
             return []
 
         # Create a queue to store the visited cells and their paths
-        queue = deque([(start, [start])])
+        queue = deque([(start, [start], allowed_block_count)])
 
         # Create a set to store the visited cells
         visited = set()
 
         # Perform breadth-first search
         while queue:
-            cell, path = queue.popleft()
+            cell, path, allowed_block_count_at_cell = queue.popleft()
             if cell == end:
                 return path
             for dx, dy in directions:
                 x, y = cell[0] + dx, cell[1] + dy
-                if (x, y) not in visited and 0 <= x < len(matrix) and 0 <= y < len(
-                        matrix[0]):
-                    visited.add((x, y))
-                    queue.append(((x, y), path + [(x, y)]))
+                square = self.tuple_to_square((x, y))
+                if (x, y) not in visited and 0 <= x < self.dimensions and 0 <= y < self.dimensions and not (square in piece_map and allowed_block_count_at_cell == 0):
+                    allowed_block_count_for_next = allowed_block_count_at_cell
+                    if square in piece_map:
+                        allowed_block_count_for_next -= 1
+                    visited.add((x, y, allowed_block_count_for_next))
+                    queue.append(((x, y), path + [(x, y)], allowed_block_count_for_next))
 
         # Return an empty path if no path is found
         return []
 
+     
     def move_piece_when_path_blocked(self, src, dst, piece_map):
+        # find emptiest simpel path
+        # move pices out of path, never use the dst square
+        # if there is no way out for a piece, find an adjusent square to the path and clear it somehow
+        # move piece to dst
+        #move pieces back
         src_curr_square = src
         src_cell = self.square_to_index_tuple(src)
         dst_cell = self.square_to_index_tuple(dst)
-        path = self.blocked_path(src_cell, dst_cell)[1:]
+        path = None
+        allowed_block_count = 1
+        while not path:
+            path = self.blocked_path(src_cell, dst_cell, piece_map, allowed_block_count)
+            allowed_block_count += 1
+        
         extra_moves_stack = deque()
 
         farthest_square_with_direct_path = src
@@ -134,8 +145,6 @@ class WizardsChessController:
 
     def shortest_path_to_empty_cell(self, piece_map, start, dst):
 
-        matrix = [[1 + x + y * 8 for x in range(8)] for y in range(8)]
-
         # Create a queue to store the visited cells and their paths
         queue = deque([(start, [start])])
 
@@ -150,7 +159,7 @@ class WizardsChessController:
                 return path
             for dx, dy in directions:
                 x, y = cell[0] + dx, cell[1] + dy
-                if (x, y) not in visited and 0 <= x < len(matrix) and 0 <= y < len(matrix[0]) and (x, y) != dst:
+                if (x, y) not in visited and 0 <= x < self.dimensions and 0 <= y < self.dimensions and (x, y) != dst:
                     visited.add((x, y))
                     queue.append(((x, y), path + [(x, y)]))
 
@@ -160,11 +169,11 @@ class WizardsChessController:
 
 # Driver code
 if __name__ == "__main__":
-    # board = chess.Board()
-    # grid = WizardsChessController()
+    board = chess.Board()
+    grid = WizardsChessController()
     # pieces_map = board.piece_map()
     # grid.move_piece(5, 17, pieces_map)
     pass
-    # print(grid.get_blocked_path((0,1),(2,2)))
+    print(grid.blocked_path((0,2),(2,0), board.piece_map(), 2))
     # print(grid.shortest_path_to_empty_cell(board, (0, 1)))
     # print(grid.shortest_not_blocked_path(board,(0,1), (2,2)))
