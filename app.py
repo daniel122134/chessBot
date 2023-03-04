@@ -119,6 +119,17 @@ def play_an_auto_game():
         controller.move_piece(move.from_square, move.to_square, board.piece_map())
         board.push(move)
 
+@app.route('/preset', methods=["GET"])
+@response_wrapper
+def play_a_preset_game():
+    
+
+    moves = [chess.Move.from_uci("e2e4"), chess.Move.from_uci("e7e5"), chess.Move.from_uci("g1f3"), chess.Move.from_uci("a7a6"), chess.Move.from_uci("f1c4"), chess.Move.from_uci("g8f6"), chess.Move.from_uci("c4f7"), chess.Move.from_uci("f8f7"), chess.Move.from_uci("f3e5"), chess.Move.from_uci("d7d6"), chess.Move.from_uci("e5f7"), chess.Move.from_uci("d8f7"), chess.Move.from_uci("d2d4"), chess.Move.from_uci("f7f6"), chess.Move.from_uci("c2c3"), chess.Move.from_uci("e8g8"), chess.Move.from_uci("b1c3"), chess.Move.from_uci("f6f5"), chess.Move.from_uci("c1f4"), chess.Move.from_uci("f5f4"), chess.Move.from_uci("f4e3"), chess.Move.from_uci("f7e7"), chess.Move.from_uci("e1g1"), chess.Move.from_uci("e7e6"), chess.Move.from_uci("d1d2"), chess.Move.from_uci("e6e5"), chess.Move.from_uci("d2d3"), chess.Move.from_uci("e5e4"), chess.Move.from_uci("d3d4"), chess.Move.from_uci("e4e3"), chess.Move.from_uci("d4d5"), chess.Move.from_uci("e3e2"), chess.Move.from_uci("d5d6"), chess.Move.from_uci("e2e1"), chess.Move.from_uci("d6d7"), chess.Move.from_uci("e1d1"), chess.Move.from_uci("d7d8"), chess.Move.from_uci("d1c1"), chess.Move.from_uci("d8d7"), chess.Move.from_uci("c1b1"), chess.Move.from_uci("d7d8"), chess.Move.from_uci("b1a1"), chess.Move.from_uci("d8d7"), chess.Move.from_uci("a1b1")]
+    for move in moves:
+        print(move)
+        controller.move_piece(move.from_square, move.to_square, board.piece_map())
+        board.push(move)
+
 @app.route('/map', methods=["GET"])
 @response_wrapper
 def map_bord():

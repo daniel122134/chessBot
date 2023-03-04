@@ -29,11 +29,8 @@ class GridControl:
         print("moving to square {}".format(square_num))
         row = square_num // 8
         col = square_num % 8
-        print("row: {}, col: {}".format(row, col))
         x = self.offset_left + (col * self.cell_length) # + self.cell_length / 2
-        print("x: {}, offset_left: {}, cell_length: {}".format(x, self.offset_left, self.cell_length))
         y = self.offset_up + (row * self.cell_length) #+ self.cell_length / 2
-        print("y: {}, offset_up: {}, cell_length: {}".format(x, self.offset_up, self.cell_length))
         asyncio.run(self.move_to_coordinates(x, y))
         
 
