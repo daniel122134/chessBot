@@ -81,7 +81,7 @@ def right():
 
 @app.route('/validate', methods=["GET"])
 @response_wrapper
-def corners():
+def validate():
     controller.lift.lift()
     controller.grid.move_to_square(0)
     controller.lift.lower()
