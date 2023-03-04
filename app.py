@@ -113,6 +113,8 @@ def play_an_auto_game():
             return "game over"
 
         move = random.choice(list(board.legal_moves))
+        if move.from_square == 62 or move.from_square == 57 or move.from_square == 1 or move.from_square==6:
+            continue
         print(move)
         controller.move_piece(move.from_square, move.to_square, board.piece_map())
         board.push(move)
