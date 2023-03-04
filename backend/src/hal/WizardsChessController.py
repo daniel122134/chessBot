@@ -161,11 +161,11 @@ class WizardsChessController:
 
 # Driver code
 if __name__ == "__main__":
-    board = chess.Board()
-    grid = WizardsChessController()
-    pieces_map = board.piece_map()
-    grid.move_piece(5, 17, pieces_map)
-
+    # board = chess.Board()
+    # grid = WizardsChessController()
+    # pieces_map = board.piece_map()
+    # grid.move_piece(5, 17, pieces_map)
+    pass
     # print(grid.get_blocked_path((0,1),(2,2)))
     # print(grid.shortest_path_to_empty_cell(board, (0, 1)))
     # print(grid.shortest_not_blocked_path(board,(0,1), (2,2)))
