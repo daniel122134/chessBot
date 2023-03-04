@@ -65,6 +65,7 @@ def make_random_move():
 @app.route('/reset', methods=["GET"])
 @response_wrapper
 def reset():
+    controller.lift.lower()
     controller.grid.move_up_1_centimeter()
     controller.grid.move_left_1_centimeter()
 
@@ -102,9 +103,17 @@ def play_an_auto_game():
 
         move = random.choice(list(board.legal_moves))
         print(move)
-        print(move)
         controller.move_piece(move.from_square, move.to_square, board.piece_map())
         board.push(move)
+
+@app.route('/map', methods=["GET"])
+@response_wrapper
+def map_bord():
+    controller.lift.lower()
+    for i in range(64):
+        controller.grid.move_to_square(i)
+        time.sleep(3)
+
 
 
 @app.route('/', defaults={'path': 'index.html'})
