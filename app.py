@@ -114,7 +114,9 @@ def map_bord():
     controller.lift.lift()
     for i in range(64):
         controller.grid.move_to_square(i)
-        time.sleep(3)
+    controller.grid.move_to_square(0)
+    controller.lift.lower()
+
 
 
 
