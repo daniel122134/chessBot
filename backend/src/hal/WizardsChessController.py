@@ -25,7 +25,7 @@ class WizardsChessController:
 
     def move_piece_along_path(self, path):
         print(0)
-        self.grid.move_to_square(path[0])
+        self.grid.move_to_square(tuple_to_square(path[0]))
         print(0.5)
         self.lift.lift()
         for step in path:
