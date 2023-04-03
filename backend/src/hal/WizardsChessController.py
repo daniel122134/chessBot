@@ -29,6 +29,7 @@ class WizardsChessController:
         for step in path:
             self.grid.move_to_square(self.tuple_to_square(step))
         self.lift.lower()
+        # pass
 
     def move_piece(self, src, dst, piece_map):
         src_cell = square_to_index_tuple(src)
@@ -127,8 +128,7 @@ class WizardsChessController:
         for i, path_tuple in enumerate(paths):
             movements[i] = self.get_clear_path_movements(piece_map, path_tuple)
 
-        optimal_path_index = self.get_index_of_smallest_list(movements)
-        return movements[optimal_path_index]
+        return self.get_smallest_list(movements)
 
     def get_clear_path_movements(self, piece_map, path_tuple):
         # we save an id for each soldier to calculate the combine function at the end
@@ -142,6 +142,8 @@ class WizardsChessController:
             square = tuple_to_square(cell)
             if square in copy_piece_map:
                 movements_to_free_cell = self.get_movements_to_free_way(cell, copy_piece_map, path)
+                if not movements_to_free_cell:
+                    return []
                 for movement in movements_to_free_cell:
                     src = tuple_to_square(movement[0])
                     dst = tuple_to_square(movement[1])
@@ -167,20 +169,24 @@ class WizardsChessController:
 
         return movements_in_right_order
 
-    def get_index_of_smallest_list(self, lists):
+    def get_smallest_list(self, lists):
+        not_empty_lists = [item for item in lists.values() if item != []]
         min_index = 0
-        min_len = len(lists[min_index])
-        for i in range(1, len(lists)):
-            if len(lists[i]) < min_len:
-                min_len = len(lists[i])
+        min_len = len(not_empty_lists[min_index])
+        for i in range(1, len(not_empty_lists)):
+            if len(not_empty_lists[i]) < min_len:
+                min_len = len(not_empty_lists[i])
                 min_index = i
-        return min_index
+        return not_empty_lists[min_index]
 
 
     def get_movements_to_free_way(self, cell, piece_map, main_path):
-        print(main_path)
         movements = []
         path_to_empty_cell = self.shortest_path_to_empty_cell(piece_map, cell, main_path)
+
+        if not path_to_empty_cell:
+            return []
+
         empty_cell = path_to_empty_cell[-1]
         path_to_empty_cell.reverse()
         cells_to_move = path_to_empty_cell[1:]
@@ -209,9 +215,8 @@ class WizardsChessController:
                 return path
             for dx, dy in directions:
                 x, y = cell[0] + dx, cell[1] + dy
-                # TODO: check if cell is dst
                 if (x, y) not in visited and 0 <= x < self.dimensions and 0 <= y < self.dimensions and \
-                        (x, y) != main_path[-1]:
+                        (x, y) != main_path[-1] and (x, y) != main_path[0]:
                     visited.add((x, y))
                     queue.append(((x, y), path + [(x, y)]))
 
