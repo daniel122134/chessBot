@@ -27,7 +27,7 @@ class WizardsChessController:
         self.grid.move_to_square(path[0])
         self.lift.lift()
         for step in path:
-            self.grid.move_to_square(self.tuple_to_square(step))
+            self.grid.move_to_square(tuple_to_square(step))
         self.lift.lower()
         # pass
 
