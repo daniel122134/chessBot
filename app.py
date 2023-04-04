@@ -172,7 +172,7 @@ def map_bord():
 
 @app.route('/go', methods=["POST"])
 @response_wrapper
-def map_bord():
+def go():
     dest = request.json["dest"]
     lift = request.json["lift"]
     if lift:
