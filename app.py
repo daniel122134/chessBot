@@ -116,8 +116,22 @@ def align():
         controller.grid.move_to_square(47+i)
         controller.lift.lift()
         controller.lift.lower()
-    
-    
+
+
+@app.route('/jurn', methods=["GET"])
+@response_wrapper
+def jurn():
+    controller.lift.lift()
+    for i in range(16):
+        controller.grid.move_to_square(i)
+        time.sleep(1)
+
+    for i in range(16):
+        controller.grid.move_to_square(48+i)
+        time.sleep(1)
+    controller.lift.lower()
+
+
 
 
 @app.route('/randomEndless', methods=["GET"])
