@@ -4,7 +4,7 @@ import random
 import time
 
 import chess
-from flask import Flask, send_from_directory
+from flask import Flask, send_from_directory, request
 
 from backend.src.entities.ChessResponse import response_wrapper
 from backend.src.hal.WizardsChessController import WizardsChessController
@@ -170,6 +170,17 @@ def map_bord():
     controller.grid.move_to_square(0)
     controller.lift.lower()
 
+@app.route('/go', methods=["POST"])
+@response_wrapper
+def map_bord():
+    dest = request.json["dest"]
+    lift = request.json["lift"]
+    if lift:
+        controller.lift.lift()
+    controller.grid.move_to_square(int(dest))
+    if lift:
+        controller.lift.lower()
+    
 
 
 
