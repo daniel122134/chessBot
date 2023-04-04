@@ -113,7 +113,7 @@ def align():
         controller.lift.lower()
 
     for i in range(16):
-        controller.grid.move_to_square(47+i)
+        controller.grid.move_to_square(48+i)
         controller.lift.lift()
         controller.lift.lower()
 
