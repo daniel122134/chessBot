@@ -104,6 +104,21 @@ def corners():
         
     controller.lift.lower()
 
+@app.route('/align', methods=["GET"])
+@response_wrapper
+def align():
+    for i in range(16):
+        controller.grid.move_to_square(i)
+        controller.lift.lift()
+        controller.lift.lower()
+
+    for i in range(16):
+        controller.grid.move_to_square(47+i)
+        controller.lift.lift()
+        controller.lift.lower()
+    
+    
+
 
 @app.route('/randomEndless', methods=["GET"])
 @response_wrapper
